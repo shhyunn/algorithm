@@ -1,28 +1,77 @@
 def solution(answers):
-    num1 = [1,2,3,4,5]
-    num2 = [2,1,2,3,2,4,2,5]
-    num3 = [3,3,1,1,2,2,4,4,5,5]
+    pattern1 = [1,2,3,4,5]
+    pattern2 = [2,1,2,3,2,4,2,5]
+    pattern3 = [3,3,1,1,2,2,4,4,5,5]
     
-    result = [0 for _ in answers]
-
-    for i,answer in enumerate(answers):
-        if num1[(i + 5) % 5] == answer:
-            result[0] += 1
-            
-        if num2[(i + 8) % 8] == answer:
-            result[1] += 1
+    answer1 = 0
+    answer2 = 0
+    answer3 = 0
     
-        if num3[(i + 10) % 10] == answer:
-            result[2] += 1
     
-    max_value = max(result)
+    for i,a in enumerate(answers):
+        if a == pattern1[i % 5]:
+            answer1 += 1
+        
+        if a == pattern2[i % 8]:
+            answer2 += 1
+        
+        if a == pattern3[i % 10]:
+            answer3 += 1
+    
+    res = [answer1, answer2, answer3]
+    
+    max_value = max(res)
     answer = []
     
-    for i,res in enumerate(result):
-        if res == max_value:
+    for i,a in enumerate(res):
+        if a == max_value:
             answer.append(i+1)
-    
+            
     return answer
+    
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+#     num1 = [1,2,3,4,5]
+#     num2 = [2,1,2,3,2,4,2,5]
+#     num3 = [3,3,1,1,2,2,4,4,5,5]
+    
+#     result = [0 for _ in answers]
+
+#     for i,answer in enumerate(answers):
+#         if num1[(i + 5) % 5] == answer:
+#             result[0] += 1
+            
+#         if num2[(i + 8) % 8] == answer:
+#             result[1] += 1
+    
+#         if num3[(i + 10) % 10] == answer:
+#             result[2] += 1
+    
+#     max_value = max(result)
+#     answer = []
+    
+#     for i,res in enumerate(result):
+#         if res == max_value:
+#             answer.append(i+1)
+    
+#     return answer
 
 
 
