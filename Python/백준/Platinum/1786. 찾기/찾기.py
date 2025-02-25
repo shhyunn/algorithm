@@ -1,30 +1,26 @@
-def make_pi():
-    pi = [0 for i in range(0, len(P))]
+def solution():
+    result = []
+    count = 0
+    lt, lp = len(T), len(P)
+    pi = [0] * lp
 
     j = 0
-    for i in range(1, len(P)):
+    for i in range(1, lp):
         while j > 0 and P[i] != P[j]:
             j = pi[j - 1]
 
-        if (P[i] == P[j]):
+        if P[i] == P[j]:
             j += 1
             pi[i] = j
-    return pi
-
-
-def solution(pi):
-    result = []
-    count = 0
-
+ 
     j = 0
-    for i in range(0, len(T)):
-
+    for i in range(lt):
         while j > 0 and T[i] != P[j]:
             j = pi[j - 1]
 
         if T[i] == P[j]:
-            if j == (len(P) - 1):
-                result.append(i - len(P) + 2)
+            if j == lp - 1:
+                result.append(i - lp + 2)
                 count += 1
                 j = pi[j]
             else:
@@ -37,4 +33,4 @@ def solution(pi):
 
 T = input()
 P = input()
-solution(make_pi())
+solution()
