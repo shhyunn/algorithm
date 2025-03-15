@@ -2,10 +2,22 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
+arr = map(int , input().split())
 
-arr = list(map(int, input().split(" ")))
+res = 0
+prev = 0
+res = -1e9
 
-for i in range(1, N):
-    arr[i] = max(arr[i-1]+arr[i], arr[i])
+for a in arr:
+	if prev + a >= 0:
+		prev = max(a, prev+a)
+	else:
+		prev = a
+	res = max(res, prev)
 
-print(max(arr))
+print(res)
+
+
+
+
+
