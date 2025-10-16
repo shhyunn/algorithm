@@ -1,36 +1,27 @@
-#include <string>
-#include <vector>
-#define DIVIDED_NUM 1000000007
-
+#include <bits/stdc++.h>
+#define MAX_NUM 1000000007
 using namespace std;
 //최단 경로의 개수를 -로 나눈 나머지, 물웅덩이는 피해서 가야함
 int solution(int m, int n, vector<vector<int>> puddles) {
     
-    vector<vector<int>> dp(n, vector<int>(m, 0));
+    int answer = 0;
+    
+    vector<vector<int>> maps;
+    maps.resize(m, vector<int>(n, 0));
     for (auto& p : puddles) {
-        dp[p[1] - 1][p[0] - 1] = -1; //물웅덩이
+        maps[p[0]-1][p[1]-1] = -1; //접근 불가
     }
     
-    dp[0][0] = 1;
+    maps[0][0] = 1;
     
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
             if (i == 0 && j == 0) continue;
-            if (dp[i][j] == -1) {
-                dp[i][j] = 0;
-                continue;
-            }
+            if (maps[i][j] == -1) {maps[i][j] = 0; continue;}
             
-            if (j > 0 && dp[i][j-1] != -1) {
-                dp[i][j] = (dp[i][j] + dp[i][j-1]) % DIVIDED_NUM;
-            }
-            
-            if (i > 0 && dp[i-1][j] != -1) {
-                dp[i][j] = (dp[i][j] + dp[i-1][j]) % DIVIDED_NUM;
-            }
+            if (i > 0 && maps[i-1][j] != -1) maps[i][j] = (maps[i][j] + maps[i-1][j] % MAX_NUM);
+            if (j > 0 && maps[i][j-1]) maps[i][j] = (maps[i][j] + maps[i][j-1]) % MAX_NUM;
         }
-    }
-    
-    int answer = dp[n-1][m - 1];
-    return answer;
+     }
+    return maps[m-1][n-1];
 }
