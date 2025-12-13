@@ -1,22 +1,30 @@
+#dp로 풀기
+
+
+
 def solution(m, n, puddles):
-    answer = 0
-    dp = [[0 for _ in range(m+1)] for _ in range(n+1)]
     
-    for puddle in puddles:
-        [a,b] = puddle #m, n
-        dp[b][a] = -1
+    board = [[0 for _ in range(n)] for _ in range(m)]
+    dp = [[0 for _ in range(n)] for _ in range(m)]
     
+    for px, py in puddles:
+        board[px-1][py-1] = -1
+        
     
-    for i in range(1, n+1):
-        for j in range(1, m+1):
-            if i == 1 and j == 1:
-                dp[1][1] = 1
+    for i in range(m):
+        for j in range(n):
+            if i == 0 and j == 0:
+                dp[i][j] = 1
                 continue
-            if dp[i][j] == -1:
+            
+            if board[i][j] == -1:
                 dp[i][j] = 0
                 continue
                 
-            dp[i][j] = (dp[i-1][j] + dp[i][j-1]) % 1000000007  # 위쪽에서 오는 경우의 수
+            if i > 0:
+                dp[i][j] = (dp[i][j] + dp[i-1][j]) % 1000000007
+            
+            if j > 0:
+                dp[i][j] = (dp[i][j] + dp[i][j-1]) % 1000000007
                 
-    answer = dp[n][m]
-    return answer
+    return dp[m-1][n-1]
